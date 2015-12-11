@@ -1,0 +1,30 @@
+# Options: "scan", "yaml".
+routing_type: scan
+scan_options:
+  exclude_dir:
+    - partials
+    - layout
+  exclude_name:
+    - 'index.html.twig'
+    - '404.html.twig'
+  include_name:
+    - '*.html.twig'
+
+# These values are passed directly to the twig environment constructor.
+twig:
+  debug: true
+  cache: false
+
+# Currently only supports "basic", all other values turn off authentication.
+auth:
+  type: none
+  users: []
+
+# URL processor twig plugin config, setting preserve values tells URL processor
+# to maintain these GET query parameters when building links unless they are
+# passed as NULL.
+url_processor:
+  query:
+    preserve:
+      - authenticated
+      - privileged

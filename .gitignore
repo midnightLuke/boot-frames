@@ -1,0 +1,6 @@
+# ignore package-managed directories
+vendor
+web/components
+
+# ignore composer lock file
+composer.lock

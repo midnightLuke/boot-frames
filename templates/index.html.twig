@@ -1,0 +1,41 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Wireframe List{% endblock %}
+{% block body %}
+  <div class="container">
+    <h1>Prototype index</h1>
+    <p>To toggle available links on a wireframe press <code>q</code> on the
+    keyboard (<strong>NOTE</strong>: Currently links hidden in drop downs will not
+    show unless the dropdown is open).</p>
+    {% if routes|length > 0 %}
+      <ul>
+      {% for route in routes %}
+        <li><a href="{{ url(route.path) }}">{{ route.description }}</a></li>
+      {% endfor %}
+      </ul>
+    {% else %}
+      No wireframes yet.
+    {% endif %}
+
+    <h2>Page options</h2>
+
+    <p>Pages can appear different depending on the level of permissions you
+    have. The icons in the bottom left indicate your current status.
+    Click the icons to toggle the status (note: on some pages this will have no
+    effect).</p>
+
+    <p><strong>Authentication</strong>
+    <ul>
+      <li><span class="glyphicon glyphicon-eye-close"></span> not authenticated</li>
+      <li><span class="glyphicon glyphicon-eye-open"></span> authenticated</li>
+    </ul></p>
+
+    <p><strong>Privileges</strong>
+    <ul>
+      <li><span class="glyphicon glyphicon-ban-circle"></span> not privileged</li>
+      <li><span class="glyphicon glyphicon-ok-circle"></span> privileged</li>
+    </ul></p>
+
+    <p><strong>NOTE</strong>: Being "privileged" implies being "authenticated"
+    and being "not authenticated" implies being "not privileged".</p>
+  </div>
+{% endblock %}

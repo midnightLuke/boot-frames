@@ -1,0 +1,141 @@
+{% extends 'layout/one-col-12.html.twig' %}
+{% block before %}
+  <header class="jumbotron">
+    <div class="container">
+      <h1>Boot Frames</h1>
+    </div>
+  </header>
+{% endblock %}
+{% block main %}
+  <article class="markdown-body">
+    <p>Boot Frames is a wireframing framework that uses <a href="http://twig.sensiolabs.org/">Twig</a>
+    and <a href="http://getbootstrap.com/">Bootstrap</a> to provide a way for web developers to
+    quickly wireframe and prototype websites.</p>
+
+    <h2>
+    <a id="user-content-why-does-this-exist" class="anchor" href="#why-does-this-exist" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why does this exist?</h2>
+
+    <p>I am a back-end developer who uses PHP every day to build websites.  I will
+    occasionally find myself needing to wireframe something to explain a concept to
+    clients/designers/project managers/etc, or, in some cases, wireframe an entire
+    section of a site to get a better grasp on a concept myself.  Being a backend
+    developer I found myself balking at tools like "My Balsamiq" and "Moqups" (which
+    are great tools for non-technical folks putting together wireframes) and longing
+    to just be able to write some HTML and not repeat myself so much.</p>
+
+    <p>With the advent of some truly amazing templating languages and my own experience
+    being in Drupal and Symfony I decided to create a simple framework that would
+    allow me to put together some common elements for a website and quickly put
+    together wireframes using HTML, CSS and Javascript, the result is Boot Frames.</p>
+
+    <p>Boot Frames uses Twig as it's templating engine and Bootstrap as it's base theme
+    to enable developers to quickly build wireframes in a way that is comfortable
+    and familiar (and most of the time a lot closer to what the end result will be).
+    It also provides a set of common tools to make the wireframes easy to navigate
+    and manipulate for project managers and clients.</p>
+
+    <h2>
+    <a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+    <p>Either clone this repository or download and unzip a release from the "releases"
+    tab above.  From the root directory run:</p>
+
+    <pre><code>composer install
+    </code></pre>
+
+    <p>to install the dependencies for Boot Frames.</p>
+
+    <p>To run bootframes you need to make the <code>web/</code> directory available in a web
+    browser, which can be done in a number of ways on your local, but I'm not going
+    into those in this documentation.  Visit Boot Frames in the browser and you
+    should be good to go.</p>
+
+    <h2>
+    <a id="user-content-configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+    <p>Boot Frames has two files in the <code>config/</code> directory:</p>
+
+    <ul>
+    <li>
+    <code>config.yml</code>: this file contains the global application configuration</li>
+    <li>
+    <code>routes.yml</code>: this files contains the manually configured routes (this is
+    optional)</li>
+    </ul>
+
+    <h2>
+    <a id="user-content-creating-wireframes" class="anchor" href="#creating-wireframes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating wireframes</h2>
+
+    <p>By default Boot Frames will scan the <code>templates/</code> for wireframes and
+    automatically create routes for any templates it finds (this can be overridden
+    in the config.yml file).</p>
+
+    <p>To create a new wireframe just create a new template in the <code>templates/</code>
+    directory (or any sub-directory) and it will automatically appear on the
+    wireframes list.</p>
+
+    <p>For help using Twig check out the excellent
+    <a href="http://twig.sensiolabs.org/doc/templates.html">documentation</a> on their website.</p>
+
+    <h3>
+    <a id="user-content-boot-frame-link-helpers" class="anchor" href="#boot-frame-link-helpers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boot Frame link helpers</h3>
+
+    <p>Boot Frames comes with several Twig plugins to ease creating links between
+    wireframes and linking to assets within the <code>web/</code> directory.</p>
+
+    <h4>
+    <a id="user-content-url" class="anchor" href="#url" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>url</code>
+    </h4>
+
+    <p>Use <code>&lbrace;&lbrace; url('/absolute/url') &rbrace;&rbrace;</code> in your templates to link to an absolute URL in
+    the web directory, this will prefix the link with any subdirectories required for
+    the link to function (and the functions below all pass through this function).</p>
+
+    <h4>
+    <a id="user-content-route" class="anchor" href="#route" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>route</code>
+    </h4>
+
+    <p>Use <code>&lbrace;&lbrace; route('/route/machine/name') &rbrace;&rbrace;</code> (or <code>&lbrace;&lbrace; route('route_machine_name') &rbrace;&rbrace;</code>
+    if using the routes.yml file).  To link to any route you have defined.  If
+    Boot Frames cannot locate the route it simply outputs a <code>#</code> so that you can
+    create the wireframe later (if you are so inclined) and the link will
+    automatically activate.</p>
+
+    <h4>
+    <a id="user-content-route_reverse" class="anchor" href="#route_reverse" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>route_reverse</code>
+    </h4>
+
+    <p>This functions the same as the <code>route</code> function, but instead allows you to input
+    a path and get the same result (either an active link or a <code>#</code> if that path
+    isn't defined for a route).  This is more useful when using the routes.yml file.</p>
+
+    <h3>
+    <a id="user-content-boot-frame-authentication-states" class="anchor" href="#boot-frame-authentication-states" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boot Frame authentication states</h3>
+
+    <p>By default Boot Frames sets and maintains two GET parameters "authenticated" and
+    "privileged", these are set as global twig variables so all templates have
+    access to them and can modify behaviour accordingly, for example:</p>
+
+    <div class="highlight highlight-text-html-twig"><pre>
+    {&percnt; <span class="pl-k">if</span> <span class="pl-smi">authenticated</span> &percnt;}
+      Only authenticated users can see this.
+    {&percnt; <span class="pl-k">else</span> &percnt;}
+      You are not authenticated.
+    {&percnt; <span class="pl-k">endif</span> &percnt;}
+    </pre></div>
+
+    <h2>
+    <a id="user-content-navigating-wireframes" class="anchor" href="#navigating-wireframes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Navigating wireframes</h2>
+
+    <p>Boot Frames comes with several helpers that allow users to clearly view all
+    active links for a wireframe and view the same wireframe as "authenticated" and
+    "privileged" users.  Controls for toggling "authenticated" and "privileged"
+    appear in the bottom left corner of the screen, along with a link back to the
+    wireframe index.</p>
+
+    <p>Pressing <code>q</code> on any page will highlight all available links using bootstrap
+    tooltips.  By default the tooltip shows the href attribute of the link, but you
+    can specify a title to override this.</p>
+  </article>
+{% endblock %}
+

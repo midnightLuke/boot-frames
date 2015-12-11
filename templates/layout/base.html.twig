@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Stylesheets -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+  <!-- Bower alternatives -->
+  <!--<link rel="stylesheet" type="text/css" href="{{ url('/components/bootstrap/dist/css/bootstrap.min.css') }}">-->
+
+  <!-- Bootframes global css -->
+  <link rel="stylesheet" href="{{ url('/css/global.css') }}" type="text/css">
+
+  <title>{% block title %}{% endblock %} | BootFrames</title>
+</head>
+<body>
+  {% block body %}{% endblock %}
+  {% include 'partials/bootframe-actions.html.twig' %}
+
+  <!-- Javascripts -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <!-- Bower alternatives -->
+  <!--<script src="{{ url('/components/jquery/dist/jquery.min.js') }}"></script>-->
+  <!--<script src="{{ url('/components/bootstrap/dist/js/bootstrap.min.js') }}"></script>-->
+
+  <!-- BootFrames global js -->
+  <script src="{{ url('/js/global.js') }}"></script>
+</body>
+</html>

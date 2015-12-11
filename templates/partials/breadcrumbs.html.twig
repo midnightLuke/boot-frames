@@ -1,0 +1,17 @@
+<div class="breadcrumb-container">
+  <div class="container">
+    <ol class="breadcrumb">
+      {% for crumb in crumbs %}
+        {% if loop.last %}
+          <li class="active">
+            {% if crumb.glyph %}<span class="glyphicon glyphicon-{{ crumb.glyph }}"></span> {% endif %}{{ crumb.text }}
+          </li>
+        {% else %}
+          <li>
+            <a href="{{ route(crumb.route) }}">{% if crumb.glyph %}<span class="glyphicon glyphicon-{{ crumb.glyph }}"></span> {% endif %}{{ crumb.text }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.global-actions .list-group {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 1em 1em 1em 1.5em;
+  margin: 0 0 1em -.5em;
+  z-index: 1000;
+  border-radius: 0px 2px 2px 0px;
+  box-shadow: 3px 3px 5px #888888;
+  background-color: #e3e3e3;
+  border: solid 1px #cbcbcb;
+  font-size: 18px;
+}

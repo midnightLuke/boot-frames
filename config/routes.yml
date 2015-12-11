@@ -1,0 +1,5 @@
+# this file is only used if you switch to "yaml" routing_type in config.yml
+introduction:
+  path: /introduction
+  template: introduction.html.twig
+  description: Welcome to Boot Frames!

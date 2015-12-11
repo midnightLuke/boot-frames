@@ -1,0 +1,6 @@
+<div class="alert alert-{{ type }}" role="alert">
+  {% if glyph %}
+    <span class="glyphicon glyphicon-{{ glyph }}" aria-hidden="true"></span>
+  {% endif %}
+  {{ message|raw }}
+</div>

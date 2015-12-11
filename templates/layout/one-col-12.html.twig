@@ -1,0 +1,13 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block body %}
+  {% block before %}{% endblock %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% block main %}{% endblock %}
+      </div>
+    </div>
+  </div>
+  {% block after %}{% endblock %}
+{% endblock %}
