@@ -6,6 +6,7 @@
             "email": "luke.bainbridge@gmail.com"
         }
     ],
+    "license": "MIT",
     "require": {
         "twig/twig": "~1.23",
         "symfony/http-foundation": "~2.7",
