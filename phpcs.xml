@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="boot-frames">
+  <rule ref="PSR1"/>
+  <rule ref="PSR2"/>
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+  <rule ref="Generic.Files.LineLength"/>
+  <rule ref="Squiz.Commenting.FunctionComment"/>
+  <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
+</ruleset>

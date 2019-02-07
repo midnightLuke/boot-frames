@@ -2,66 +2,88 @@
 
 namespace BootFrame\Twig;
 
-class Url {
-  /**
-   * Helper function to properly prefix absolute URLs and append query strings,
-   * preserves specific queries for use in application.
-   */
-  public static function url($context, $path = null, $query = array()) {
-    $request = $context['request'];
-    $config = $context['config'];
+class Url
+{
+    /**
+     * Helper function to properly prefix absolute URLs and append query strings,
+     * preserves specific queries for use in application.
+     *
+     * @param mixed  $context The twig context.
+     * @param string $path    The path to generate a URL for.
+     * @param array  $query   The query.
+     *
+     * @return string The url.
+     */
+    public static function url($context, string $path = null, array $query = []): string
+    {
+        $request = $context['request'];
+        $config = $context['config'];
 
-    // if this is passed as null use current path
-    if (is_null($path)) {
-      $path = $request->getPathInfo();
-    }
-
-    // prefix absolute URLs with basepath
-    if (substr($path, 0, 1) == '/') {
-      $path = $request->getBasePath() . $path;
-    }
-
-    // determine query to use
-    if (count($query) > 0 || !empty($_GET)) {
-      // preserve these queries over links on the site
-      foreach ($config['url_processor']['query']['preserve'] as $preserve) {
-        if (!array_key_exists($preserve, $query) && isset($_GET[$preserve])) {
-          $query[$preserve] = $_GET[$preserve];
+        // if this is passed as null use current path
+        if (is_null($path)) {
+            $path = $request->getPathInfo();
         }
-      }
-      $query = '?' . http_build_query($query);
-    } else {
-      $query = '';
+
+        // prefix absolute URLs with basepath
+        if (substr($path, 0, 1) == '/') {
+            $path = $request->getBasePath() . $path;
+        }
+
+        // determine query to use
+        if (count($query) > 0 || !empty($_GET)) {
+            // preserve these queries over links on the site
+            foreach ($config['url_processor']['query']['preserve'] as $preserve) {
+                if (!array_key_exists($preserve, $query) && isset($_GET[$preserve])) {
+                    $query[$preserve] = $_GET[$preserve];
+                }
+            }
+            $query = '?' . http_build_query($query);
+        } else {
+            $query = '';
+        }
+
+        // cut trailing '?' if that is the last character
+        return $path . rtrim($query, '?');
     }
 
-    // cut trailing '?' if that is the last character
-    return $path . rtrim($query, '?');
-  }
-
-  /**
-   * Looks up a route from the available routes and returns a link if available.
-   */
-  public static function route($context, $name, $query = array()) {
-    $routes = $context['routes'];
-    foreach ($routes as $route_name => $route) {
-      if ($route_name == $name) {
-        return Url::url($context, $route['path'], $query);
-      }
+    /**
+     * Looks up a route from the available routes and returns a link if
+     * available.
+     *
+     * @param mixed  $context The twig context.
+     * @param string $name    The route to generate a URL for.
+     * @param array  $query   The query.
+     *
+     * @return string The url
+     */
+    public static function route($context, string $name, array $query = []): string
+    {
+        $routes = $context['routes'];
+        foreach ($routes as $route_name => $route) {
+            if ($route_name == $name) {
+                return Url::url($context, $route['path'], $query);
+            }
+        }
+        return '#';
     }
-    return '#';
-  }
 
-  /**
-   * Looks up a url from the available routes and returns a link if available.
-   */
-  public static function route_reverse($context, $name, $query = array()) {
-    $routes = $context['routes'];
-    foreach ($routes as $route_name => $route) {
-      if ($route['path'] == $name) {
-        return Url::url($context, $route['path'], $query);
-      }
+    /**
+     * Looks up a url from the available routes and returns a link if available.
+     *
+     * @param mixed  $context The twig context.
+     * @param string $name    The route to generate a URL for.
+     * @param array  $query   The query.
+     *
+     * @return string The url.
+     */
+    public static function routeReverse($context, string $name, array $query = []): string
+    {
+        $routes = $context['routes'];
+        foreach ($routes as $route_name => $route) {
+            if ($route['path'] == $name) {
+                return Url::url($context, $route['path'], $query);
+            }
+        }
+        return '#';
     }
-    return '#';
-  }
 }
-
