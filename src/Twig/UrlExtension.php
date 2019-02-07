@@ -2,8 +2,24 @@
 
 namespace BootFrame\Twig;
 
-class Url
+use Twig\Extension\AbstractExtension;
+
+class UrlExtension extends AbstractExtension
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @return array
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_Function('url', [$this, 'url'], ['needs_context' => true]),
+            new \Twig_Function('route', [$this, 'route'], ['needs_context' => true]),
+            new \Twig_Function('route_reverse', [$this, 'routeReverse'], ['needs_context' => true]),
+        ];
+    }
+
     /**
      * Helper function to properly prefix absolute URLs and append query strings,
      * preserves specific queries for use in application.
@@ -14,7 +30,7 @@ class Url
      *
      * @return string The url.
      */
-    public static function url($context, string $path = null, array $query = []): string
+    public function url($context, string $path = null, array $query = []): string
     {
         $request = $context['request'];
         $config = $context['config'];
@@ -56,7 +72,7 @@ class Url
      *
      * @return string The url
      */
-    public static function route($context, string $name, array $query = []): string
+    public function route($context, string $name, array $query = []): string
     {
         $routes = $context['routes'];
         foreach ($routes as $route_name => $route) {
@@ -76,7 +92,7 @@ class Url
      *
      * @return string The url.
      */
-    public static function routeReverse($context, string $name, array $query = []): string
+    public function routeReverse($context, string $name, array $query = []): string
     {
         $routes = $context['routes'];
         foreach ($routes as $route_name => $route) {

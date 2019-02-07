@@ -5,6 +5,7 @@ namespace BootFrame;
 use Symfony\Component\HttpFoundation as Http;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
+use BootFrame\Twig\UrlExtension;
 
 /**
  * Main application for BootFrame, can be used as follows:
@@ -59,22 +60,8 @@ class App
         $twig->addGlobal('privileged', (isset($_GET['privileged'])));
         $twig->addGlobal('GET', $_GET);
 
-        // Add our custom twig functions.
-        $twig->addFunction(new \Twig_SimpleFunction(
-            'url',
-            ['BootFrame\\Twig\\Url', 'url'],
-            ['needs_context' => true]
-        ));
-        $twig->addFunction(new \Twig_SimpleFunction(
-            'route',
-            ['BootFrame\\Twig\\Url', 'route'],
-            ['needs_context' => true]
-        ));
-        $twig->addFunction(new \Twig_SimpleFunction(
-            'route_reverse',
-            ['BootFrame\\Twig\\Url', 'routeReverse'],
-            ['needs_context' => true]
-        ));
+        // Add our custom twig extensions.
+        $twig->addExtension(new UrlExtension());
 
         // Path to match for routing.
         $path = $this->request->getPathInfo();
