@@ -8,13 +8,13 @@
     ],
     "license": "MIT",
     "require": {
-        "twig/twig": "~1.23",
-        "symfony/http-foundation": "~2.7",
-        "symfony/finder": "~2.7",
-        "symfony/yaml": "~2.7"
+        "twig/twig": "^2.0",
+        "symfony/http-foundation": "^4.0",
+        "symfony/finder": "^4.0",
+        "symfony/yaml": "^4.0"
     },
     "require-dev": {
-        "raveren/kint": "~1.0"
+        "kint-php/kint": "^3.1"
     },
     "autoload": {
         "psr-4": {"BootFrame\\": "src/"}
