@@ -11,7 +11,8 @@
         "twig/twig": "^2.0",
         "symfony/http-foundation": "^4.0",
         "symfony/finder": "^4.0",
-        "symfony/yaml": "^4.0"
+        "symfony/yaml": "^4.0",
+        "fzaninotto/faker": "^1.8"
     },
     "require-dev": {
         "kint-php/kint": "^3.1"

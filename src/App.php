@@ -2,10 +2,11 @@
 
 namespace BootFrame;
 
-use Symfony\Component\HttpFoundation as Http;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Yaml\Yaml;
 use BootFrame\Twig\UrlExtension;
+use Faker\Factory;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation as Http;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Main application for BootFrame, can be used as follows:
@@ -52,7 +53,14 @@ class App
         $loader = new \Twig_Loader_Filesystem(BASE_DIR . '/templates');
         $twig = new \Twig_Environment($loader, $this->config['twig']);
 
+        // Create the faker generator.
+        $faker = Factory::create();
+        if (isset($this->config['faker']['seed'])) {
+            $faker->seed($this->config['faker']['seed']);
+        }
+
         // Add some useful globals.
+        $twig->addGlobal('faker', $faker);
         $twig->addGlobal('request', $this->request);
         $twig->addGlobal('config', $this->config);
         $twig->addGlobal('routes', $this->routes);
