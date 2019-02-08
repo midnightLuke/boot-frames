@@ -1,37 +1,44 @@
 <!-- BootFrame actions -->
-<div class="global-actions">
-  <div class="list-group">
+<nav class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-dark">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
 
-    <!-- Authenticated options -->
-    {% if authenticated %}
-      <a class="list-group-item hide-tooltip active" href="{{ url(null, {'authenticated': null, 'privileged': null}) }}">
-        <span class="fa fa-eye"></span>
-        <span class="sr-only">You are currently browsing as "authenticated", click here to browse as "un-authenticated".</span>
-      </a>
-    {% else %}
-      <a class="list-group-item hide-tooltip" href="{{ url(null, {'authenticated': 'true'}) }}">
-        <span class="fa fa-eye-slash"></span>
-        <span class="sr-only">You are currently browsing as "un-authenticated", click here to browse as "authenticated".</span>
-      </a>
-    {% endif %}
+        <!-- Authenticated options -->
+        {% if authenticated %}
+          <a class="nav-item nav-link hide-tooltip active" href="{{ url(null, {'authenticated': null, 'privileged': null}) }}">
+            <span class="fa fa-eye"></span> Authenticated
+            <span class="sr-only">You are currently browsing as "authenticated", click here to browse as "un-authenticated".</span>
+          </a>
+        {% else %}
+          <a class="nav-item nav-link hide-tooltip" href="{{ url(null, {'authenticated': 'true'}) }}">
+            <span class="fa fa-eye-slash"></span> Authenticated
+            <span class="sr-only">You are currently browsing as "un-authenticated", click here to browse as "authenticated".</span>
+          </a>
+        {% endif %}
 
-    <!-- Priveleged options -->
-    {% if privileged %}
-      <a class="list-group-item hide-tooltip active" href="{{ url(null, {'privileged': null}) }}">
-        <span class="fa fa-check-circle"></span>
-        <span class="sr-only">You are currently browsing as "privileged", click here to browse as "non-privileged".</span>
-      </a>
-    {% else %}
-      <a class="list-group-item hide-tooltip" href="{{ url(null, {'authenticated': 'true', 'privileged': 'true'}) }}">
-        <span class="fa fa-ban"></span>
-        <span class="sr-only">You are currently browsing as "non-privileged", click here to browse as "privileged".</span>
-      </a>
-    {% endif %}
+        <!-- Priveleged options -->
+        {% if privileged %}
+          <a class="nav-item nav-link hide-tooltip active" href="{{ url(null, {'privileged': null}) }}">
+            <span class="fa fa-check-circle"></span> Privileged
+            <span class="sr-only">You are currently browsing as "privileged", click here to browse as "non-privileged".</span>
+          </a>
+        {% else %}
+          <a class="nav-item nav-link hide-tooltip" href="{{ url(null, {'authenticated': 'true', 'privileged': 'true'}) }}">
+            <span class="fa fa-ban"></span> Privileged
+            <span class="sr-only">You are currently browsing as "non-privileged", click here to browse as "privileged".</span>
+          </a>
+        {% endif %}
 
-    <!-- Wireframe index button -->
-    <a class="list-group-item hide-tooltip" href="{{ url('/', {'privileged': null, 'authenticated': null}) }}">
-      <span class="fa fa-list"></span>
-      <span class="sr-only">Click here to return to the wireframe index.</span>
-    </a>
+        <!-- Wireframe index button -->
+        <a class="nav-item nav-link hide-tooltip" href="{{ url('/', {'privileged': null, 'authenticated': null}) }}">
+          <span class="fa fa-list"></span> Prototype Index
+          <span class="sr-only">Click here to return to the wireframe index.</span>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
+</nav>
